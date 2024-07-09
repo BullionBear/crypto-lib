@@ -8,11 +8,12 @@ need to be accessed by a hash.
 package indexedlist
 
 type IndexedList[K comparable, V any] interface {
-	Put(key K, value V)
 	Get(key K) (value V, found bool)
 	Remove(key K)
-	AddBack(key K, value V)
-	AddFront(key K, value V)
-	RemoveBack() (key K, value V, found bool)
-	RemoveFront() (key K, value V, found bool)
+	First() (K, V)
+	Last() (K, V)
+	Append(key K, value V)
+	Prepend(key K, value V)
+	RemoveBack()
+	RemoveFront()
 }
