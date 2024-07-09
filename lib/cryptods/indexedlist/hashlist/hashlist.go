@@ -34,6 +34,15 @@ func (hl *HashList[K, V]) Get(key K) (value V, found bool) {
 }
 
 func (hl *HashList[K, V]) First() (K, V) {
+	iterator := hl.linkedList.Iterator()
+	if iterator.First() {
+		key := iterator.Value()
+		return key, hl.store[key]
+	}
+	return 0, ""
+}
+
+func (hl *HashList[K, V]) Last() (K, V) {
 	// Implementation will depend on the internal data structure used
 	return 0, ""
 }
