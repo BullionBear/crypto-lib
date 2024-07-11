@@ -7,6 +7,7 @@ need to be accessed by a hash.
 
 package indexedlist
 
+// IndexedList is an interface for a list of items that can be accessed by an index
 type IndexedList[K comparable, V any] interface {
 	Get(key K) (value V, found bool)
 	Remove(key K)

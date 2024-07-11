@@ -8,6 +8,7 @@ import (
 // Assert List implementation
 var _ indexedlist.IndexedList[int, string] = (*HashList[int, string])(nil)
 
+// HashList is a struct for storing a list of items that can be accessed by an index
 type HashList[K comparable, V any] struct {
 	linkedList *doublylinkedlist.List[K]
 	store      map[K]V
