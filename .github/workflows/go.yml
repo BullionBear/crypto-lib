@@ -1,0 +1,49 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.20  # Change this to your preferred Go version
+
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Run golint
+      run: |
+        go install golang.org/x/lint/golint@latest
+        golint ./...
+    
+    - name: Run staticcheck
+      run: |
+        go install honnef.co/go/tools/cmd/staticcheck@latest
+        staticcheck ./...
+
+    - name: Run tests
+      run: | 
+        go test ./lib/cryptods/indexedlist/hashlist
+
+    - name: Run tests with coverage
+      run: go test -coverprofile=coverage.out -v ./...
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: coverage.out
+        flags: unittests
+        name: codecov-umbrella
