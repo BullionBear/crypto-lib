@@ -61,11 +61,11 @@ func (list *HashList[K, V]) RemoveBack() {
 }
 
 // RemoveFront removes the key-value pair from the front of the list
-func (hl *HashList[K, V]) RemoveFront() {
+func (list *HashList[K, V]) RemoveFront() {
 	var key K
-	iter := hl.linkedList.Iterator()
+	iter := list.linkedList.Iterator()
 	if iter.First() {
 		key = iter.Value()
-		delete(hl.store, key)
+		delete(list.store, key)
 	}
 }
