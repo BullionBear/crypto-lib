@@ -10,8 +10,6 @@ package indexedlist
 type IndexedList[K comparable, V any] interface {
 	Get(key K) (value V, found bool)
 	Remove(key K)
-	First() (K, V)
-	Last() (K, V)
 	Append(key K, value V)
 	Prepend(key K, value V)
 	RemoveBack()
