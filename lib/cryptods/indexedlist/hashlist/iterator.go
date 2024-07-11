@@ -23,51 +23,51 @@ type Iterator[K comparable, V any] struct {
 }
 
 // Next moves to the next element
-func (iter *Iterator[K, V]) Next() bool {
-	return iter.iterator.Next()
+func (list *Iterator[K, V]) Next() bool {
+	return list.iterator.Next()
 }
 
 // Prev moves to the previous element
-func (iter *Iterator[K, V]) Prev() bool {
-	return iter.iterator.Prev()
+func (list *Iterator[K, V]) Prev() bool {
+	return list.iterator.Prev()
 }
 
 // Begin moves to before the first element
-func (iter *Iterator[K, V]) Begin() {
-	iter.iterator.Begin()
+func (list *Iterator[K, V]) Begin() {
+	list.iterator.Begin()
 }
 
 // End moves to after the last element
-func (iter *Iterator[K, V]) End() {
-	iter.iterator.End()
+func (list *Iterator[K, V]) End() {
+	list.iterator.End()
 }
 
 // First moves to the first element
-func (iter *Iterator[K, V]) First() bool {
-	return iter.iterator.First()
+func (list *Iterator[K, V]) First() bool {
+	return list.iterator.First()
 }
 
 // Last moves to the last element
-func (iter *Iterator[K, V]) Last() bool {
-	return iter.iterator.Last()
+func (list *Iterator[K, V]) Last() bool {
+	return list.iterator.Last()
 }
 
 // Key returns the key of the current element
-func (iter *Iterator[K, V]) Key() K {
-	return iter.iterator.Value()
+func (list *Iterator[K, V]) Key() K {
+	return list.iterator.Value()
 }
 
 // Value returns the value of the current element
-func (iter *Iterator[K, V]) Value() V {
-	key := iter.iterator.Value()
-	return iter.list.store[key]
+func (list *Iterator[K, V]) Value() V {
+	key := list.iterator.Value()
+	return list.list.store[key]
 }
 
 // PrevTo moves to the previous element that satisfies the condition
-func (iter *Iterator[K, V]) PrevTo(cond func(key K, value V) bool) bool {
-	for iter.Prev() {
-		key := iter.iterator.Value()
-		value := iter.list.store[key]
+func (list *Iterator[K, V]) PrevTo(cond func(key K, value V) bool) bool {
+	for list.Prev() {
+		key := list.iterator.Value()
+		value := list.list.store[key]
 		if cond(key, value) {
 			return true
 		}
@@ -76,10 +76,10 @@ func (iter *Iterator[K, V]) PrevTo(cond func(key K, value V) bool) bool {
 }
 
 // NextTo moves to the next element that satisfies the condition
-func (iter *Iterator[K, V]) NextTo(cond func(key K, value V) bool) bool {
-	for iter.Next() {
-		key := iter.iterator.Value()
-		value := iter.list.store[key]
+func (list *Iterator[K, V]) NextTo(cond func(key K, value V) bool) bool {
+	for list.Next() {
+		key := list.iterator.Value()
+		value := list.list.store[key]
 		if cond(key, value) {
 			return true
 		}
